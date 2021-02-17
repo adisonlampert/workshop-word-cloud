@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body id="container">
+    <div>
+        <h1> Word Cloud Generator </h1>
+      <div class="row">
+        <div class="text-input custom-container">
+          <div class="paste-instructions">
+            <p class="tool-header"> Type/Paste Text Here </p>
+            <p>Paste or type your text to generate your free word cloud</p>
+          </div>
+          <div class="input-group">
+            <textarea class="form-control" aria-label="With textarea" id="input-text"></textarea>
+          </div> 
+        </div>
+        <div class="settings custom-container">
+          <div class="paste-instructions">
+            <p class="tool-header">Options</p>
+            <p>Customize your free word cloud with the options below</p>
+          </div>
+          <div class="options">
+            <div class="color-picker">
+              <p> COLOR SCHEME </p>
+              <div class="radio">
+                <label class="radio-container">Default
+                  <input type="radio" checked="checked" value="Default" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Cool
+                  <input type="radio" value="Cool" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Nature
+                  <input type="radio" value="Nature" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Vibrant
+                  <input type="radio" value="Vibrant" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Delicate
+                  <input type="radio" value="Delicate" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Beach
+                  <input type="radio" value="Beach" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Autumn
+                  <input type="radio" value="Autumn" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Ice
+                  <input type="radio" value="Ice" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">Citrus
+                  <input type="radio" value="Citrus" name="colorScheme">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div class="other-settings">
+              <div class="right-settings">
+                <div class="radio">
+                  <p> MODE </p>
+                  <label class="radio-container">Spiral
+                    <input type="radio" checked="checked" value="Spiral" name="mode">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="radio-container">Rectangle
+                    <input type="radio" value="Rectangle" name="mode">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="radio scales">
+                  <p> SCALES </p>
+                  <label class="radio-container">Linear
+                    <input type="radio" checked="checked" value="Linear" name="scales">
+                    <span class="checkmark" ></span>
+                  </label>
+                  <label class="radio-container">Logarithmic
+                    <input type="radio" value="Logarithmic" name="scales">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <p class="second-setting">TEXT SPACING</p>
+              <input type="range" min="1" max="30" value="1" class="slider" id="myRange">
+              <p>Value: <span id="demo"></span></p>
+              <button class="button" id="generate">GENERATE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="cloud-container"></div>
+
+
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+    </script> 
+    <script src="script.js"></script>
+    
+  </body>
+</html>
