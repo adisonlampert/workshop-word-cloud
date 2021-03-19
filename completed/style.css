@@ -1,15 +1,14 @@
+/* Imports Pippins from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+/* Hides AnyChart logo */
 .anychart-credits-text, .anychart-credits-logo, .anychart-credits {
   visibility: hidden;
 }
 
+/* Font Styles */
 h1 {
   text-align: center;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
 }
 
 h4 {
@@ -17,29 +16,50 @@ h4 {
   font-weight: 600;
 }
 
-.text-input {
+.tool-header {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.second-setting {
+  margin: 20px 0px 10px 0px;
+}
+
+/* Body/Container Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  border-radius: 8px;
+  padding: 10px 2px 25px 2px;
+  margin: 0px 15px;
   background-color: #C2E7FF;
-  border-radius: 8px 0px 0px 8px;
-  padding: 20px;
+  width: 1050px;
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-container {
+  width: 500px;
   margin-left: 15px;
 }
 
-.settings {
-  background-color: #C2E7FF;
-  border-radius: 0px 8px 8px 0px;
-  padding: 20px;
-  margin-right: 15px;
-}
-
-#input-text {
-  width: 90%;
-	height: 245px;
-	padding: 10px;
-  border-radius: 10px;
-  margin: 5px 40px 0px 10px;
-  outline: none !important;
-  font-family: 'Poppins', sans-serif;
-  resize: none;
+#cloud-container {
+  border: grey 1px solid;
+  margin: 20px auto;
+  width: 1050px;
+  border-radius: 8px;
+  height: 500px;
+  padding: 2px;
 }
 
 .options {
@@ -50,6 +70,8 @@ h4 {
   margin-left: 50px;
 }
 
+/* Removes outline of interactive HTML elements. 
+Can decrease accessibility so be cautious when doing this. */
 textarea:hover,  
 textarea:active, 
 textarea:focus, 
@@ -62,9 +84,9 @@ button:hover,
 button::after,
 label:focus,
 {
-    outline: none !important;
-    -webkit-appearance:none;
-    box-shadow: none !important;
+  outline: none !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
 }
 
 :focus {
@@ -75,52 +97,16 @@ label:focus,
   border:0;
 }
 
-.custom-container {
-  width: 500px;
-}
 
-#cloud-container {
-  border: grey 1px solid;
-  margin: 20px auto;
-  width: 1075px;
-  border-radius: 8px;
-  height: 500px;
-  padding: 2px;
-}
-
-.second-setting {
-  margin: 20px 0px 10px 0px;
-}
-
-.right-settings {
-  display: flex;
-}
-
-.scales {
-  margin-left: 20px;
-}
-
+/* Making it ✨responsive✨ */
 @media only screen and (max-width: 1110px) {
-  .custom-container {
-    width: 600px;
-    margin: 0px;
-  }
-
   .row {
-    flex-direction: column;
-    align-items: center;
+    width: 550px;
+    flex-flow: column;
   }
-
+  
   #cloud-container {
-    width: 625px;
-  }
-
-  .text-input { 
-    border-radius: 8px 8px 0px 0px;
-  }
-
-  .settings { 
-    border-radius: 0px 0px 8px 8px;
+    width: 550px;
   }
 
   .color-picker {
@@ -128,67 +114,62 @@ label:focus,
   }
 }
 
-@media only screen and (max-width: 900px) {
-  .custom-container {
-    width: 90%;
+@media only screen and (max-width: 600px) {
+  .row, #cloud-container {
+    width: 480px;
   }
 
-  #cloud-container {
-    width: 95%;
+  #container {
+    flex-flow: column wrap;
   }
 
-}
-
-@media only screen and (max-width: 450px) {
-  .custom-container {
-    margin: auto;
-    width: 375px;
+  .instructions {
+    width: 60%;
   }
 
-  #cloud-container {
-    width: 410px;
-    margin: 20px auto;
+  .input-group {
+    width: 450px;
   }
 
   .color-picker {
-    margin-right: -20px;
+    margin-right: -10px;
   }
 
   h1 {
     font-size: 21px;
-    margin-left: 30px;
   }
 }
 
-.row {
-  display: flex;
-  justify-content: center;
+.input-group {
+  width: 450px;
 }
 
-.tool-header {
+#input-text {
+  width: 90%;
+  height: 245px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 40px 0px 10px;
+  outline: none !important;
   font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 24px;
-  margin-bottom: 0;
+  resize: none;
 }
 
-.paste-instructions {
-  margin: 0px 10px 10px 10px;
-}
-
-.color-picker {
-  margin-left: 10px;
-}
-
-.radio-container {
-  display: block;
-  position: relative;
-  padding-left: 25px;
+.button {
+  background-color: #47B6FF;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  border-radius: 15px;
+}
+ 
+.button:active, 
+.button:hover {
+  background-color: #0062A3;
 }
 
 /* Hide the browser's default radio button */
@@ -241,6 +222,29 @@ label:focus,
 	background: white;
 }
 
+.color-picker {
+  margin-left: 10px;
+}
+
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.right-settings {
+  display: flex;
+}
+
+.scales {
+  margin-left: 20px;
+}
+
 .slidecontainer {
   width: 100%;
 }
@@ -270,23 +274,3 @@ label:focus,
   background: #47B6FF;
   cursor: pointer;
 }
-
-
-
-.button {
-  background-color: #47B6FF;
-  border: none;
-  color: white;
-  padding: 10px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 15px;
-}
- 
-.button:active, 
-.button:hover {
-  background-color: #0062A3;
-}
-

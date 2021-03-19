@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Word Cloud Generator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body id="container">
+    <h1> Word Cloud Generator </h1>
+    <div class="row">
+      <div class="custom-container">
+        <div class="instructions">
+          <p class="tool-header"> Type/Paste Text Here </p>
+          <p>Paste or type your text to generate your free word cloud</p>
+        </div> 
+      </div>
+      <div class="settings custom-container">
+        <div class="instructions">
+          <p class="tool-header">Options</p>
+          <p>Customize your free word cloud with the options below</p>
+        </div>
+        <div class="options">
+          <div class="other-settings"></div>
+        </div>
+      </div>
+    </div>
+    <div id="cloud-container"></div>
+
+    <!-- AnyChart Base Script -->
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <!-- AnyChart Word Cloud Script -->
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+    
+    <script src="script.js"></script>
+    
+  </body>
+</html>

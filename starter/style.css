@@ -1,0 +1,141 @@
+/* Imports Pippins from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Hides AnyChart logo */
+.anychart-credits-text, .anychart-credits-logo, .anychart-credits {
+  visibility: hidden;
+}
+
+/* Font Styles */
+h1 {
+  text-align: center;
+}
+
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.tool-header {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.second-setting {
+  margin: 20px 0px 10px 0px;
+}
+
+/* Body/Container Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  border-radius: 8px;
+  padding: 10px 2px 25px 2px;
+  margin: 0px 15px;
+  background-color: #C2E7FF;
+  width: 1050px;
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-container {
+  width: 500px;
+  margin-left: 15px;
+}
+
+#cloud-container {
+  border: grey 1px solid;
+  margin: 20px auto;
+  width: 1050px;
+  border-radius: 8px;
+  height: 500px;
+  padding: 2px;
+}
+
+.options {
+  display: flex;
+}
+
+.other-settings {
+  margin-left: 50px;
+}
+
+/* Removes outline of interactive HTML elements. 
+Can decrease accessibility so be cautious when doing this. */
+textarea:hover,  
+textarea:active, 
+textarea:focus, 
+input:focus,
+input:active,
+input:hover,
+button:focus,
+button:active,
+button:hover,
+button::after,
+label:focus,
+{
+  outline: none !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+
+:focus {
+  outline:none;
+} 
+
+::-moz-focus-inner {
+  border:0;
+}
+
+
+/* Making it ✨responsive✨ */
+@media only screen and (max-width: 1110px) {
+  .row {
+    width: 550px;
+    flex-flow: column;
+  }
+  
+  #cloud-container {
+    width: 550px;
+  }
+
+  .color-picker {
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .row, #cloud-container {
+    width: 480px;
+  }
+
+  #container {
+    flex-flow: column wrap;
+  }
+
+  .instructions {
+    width: 60%;
+  }
+
+  .input-group {
+    width: 450px;
+  }
+
+  .color-picker {
+    margin-right: -10px;
+  }
+
+  h1 {
+    font-size: 21px;
+  }
+}
