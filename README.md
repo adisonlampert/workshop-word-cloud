@@ -1,4 +1,6 @@
 # Word Cloud Generator
+
+[See it in action!](https://word-cloud-complete.addylampert.repl.co/) 
 ## Part 1: Prerequisites
 You should have a basic understanding of:
 - HTML
@@ -524,4 +526,5 @@ Here are some ideas to improve your word cloud generator:
 - Add the ability to upload a text file
 - Feature to download the generated word cloud as a jpeg
 - Add more customization options
-- Allow user to generate their own color scheme 
+- Allow user to generate their own color scheme
+- Restyle the website 
