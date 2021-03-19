@@ -26,13 +26,15 @@ Below that div is `cloud-container` which is where we are going to put the compl
 
 There are three script tags in `index.html`:
 
-    <!-- AnyChart Base Script -->
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <!-- AnyChart Word Cloud Script -->
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+##### index.html
+```html
+<!-- AnyChart Base Script -->
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+<!-- AnyChart Word Cloud Script -->
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
 
-    <script src="script.js"></script>
-  
+<script src="script.js"></script>
+ ```
   We are going to use [AnyChart's Core and Tag Cloud modules](https://docs.anychart.com/Basic_Charts/Tag_Cloud) to create our word cloud generator. AnyChart is a flexible JavaScript-based solution that allows developers to embed interactive and great looking charts and dashboards into any web, standalone, or mobile project. It's free and easy to use. 
 
 ### 2) style.css 
@@ -52,20 +54,22 @@ There are three const variables in `script.js` that will be useful to us.
 ### Create a Word Cloud
 Before we get into building the customization options, let's build a word cloud. Go to `script.js` and add this code to the next line of the document:
 
-    // create a word cloud chart
-    var chart = anychart.tagCloud();
+##### script.js
+```javascript    
+// create a word cloud chart
+var chart = anychart.tagCloud();
 
-    // fill the chart with data
-    chart.data(sample, {
-      mode: "byWord", 
-      maxItems: 12,
-      ignoreItems: commonWords
-    });
+// fill the chart with data
+chart.data(sample, {
+  mode: "byWord", 
+  maxItems: 12,
+  ignoreItems: commonWords
+});
 
-    // display the word cloud chart in the div "cloud-container"
-    chart.container("cloud-container"); 
-    chart.draw();
-
+// display the word cloud chart in the div "cloud-container"
+chart.container("cloud-container"); 
+chart.draw();
+```
 Reload your page and you'll see a word cloud! If you hover over the words, you can see the frequency of the word and the percentage of the total. Cool, huh?
 
 `anychart.tagCloud()` creates a Word Cloud graph object that we can fill with data usig the `.data` function. The `.data` function takes in two parameters: the text to use as data and a dictionary of key-value pairs that dictate how to parse and display the data. 
@@ -75,24 +79,26 @@ Reload your page and you'll see a word cloud! If you hover over the words, you c
 ### Set the Color Scheme
 Next, let's set the color scheme. 
 
-    // fill the chart with data
-    chart.data(sample, {
-      mode: "byWord", 
-      maxItems: 12,
-      ignoreItems: commonWords
-    });
+##### script.js
+```javascript
+// fill the chart with data
+chart.data(sample, {
+  mode: "byWord", 
+  maxItems: 12,
+  ignoreItems: commonWords
+});
 
-    // create and configure a color scale.
-    var customColorScale = anychart.scales.linearColor();
-    customColorScale.colors(colorSchemes["Default"]);
+// create and configure a color scale.
+var customColorScale = anychart.scales.linearColor();
+customColorScale.colors(colorSchemes["Default"]);
 
-    // set the color scale as the color scale of the chart
-    chart.colorScale(customColorScale);
+// set the color scale as the color scale of the chart
+chart.colorScale(customColorScale);
 
-    // display the word cloud chart in the div "cloud-container"
-    chart.container("cloud-container"); 
-    chart.draw();
-
+// display the word cloud chart in the div "cloud-container"
+chart.container("cloud-container"); 
+chart.draw();
+```
 If you reload the page, you'll see a new color scheme. `anychart.scales.linearColor()` sets the color scale to linear. The other option is `anychart.scales.ordinalColor` but it doesn't look as nice in my option. `.colors` sets the color scheme and takes in a list of strings that are either recognized color keywords or hexidecimal codes. The starter code has a list of color schemes and we're using the "Default" color scheme here. Change "Default" to any of the other items from the `colorSchemes` list to see what happens.
 
 ## Part 4: Building the Word Cloud Generator
@@ -101,107 +107,111 @@ If you reload the page, you'll see a new color scheme. `anychart.scales.linearCo
 First, let's create a textbox for users to input their text. In `index.html`, paste this text below the `instructions` div on line 16 so that your code looks like this:
 
 ##### index.html
-    <div class="custom-container">
-      <div class="instructions">
-        <p class="tool-header"> Type/Paste Text Here </p>
-        <p>Paste or type your text to generate your free word cloud</p>
-      </div> 
-      <div class="input-group">
-        <textarea class="form-control" aria-label="With textarea" id="input-text"></textarea>
-      </div> 
-    </div>
-
+```html
+<div class="custom-container">
+  <div class="instructions">
+    <p class="tool-header"> Type/Paste Text Here </p>
+    <p>Paste or type your text to generate your free word cloud</p>
+  </div> 
+  <div class="input-group">
+    <textarea class="form-control" aria-label="With textarea" id="input-text"></textarea>
+  </div> 
+</div>
+```
 Style it in CSS.
 
 ##### style.css 
-    .input-group {
-      width: 450px;
-    }
+```css
+.input-group {
+  width: 450px;
+}
 
-    #input-text {
-      width: 90%;
-      height: 245px;
-      padding: 10px;
-      border-radius: 10px;
-      margin: 5px 40px 0px 10px;
-      outline: none !important;
-      font-family: 'Poppins', sans-serif;
-      resize: none;
-    }
-
+#input-text {
+  width: 90%;
+  height: 245px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 40px 0px 10px;
+  outline: none !important;
+  font-family: 'Poppins', sans-serif;
+  resize: none;
+}
+```
 Nice! Now, you've got a text box. Isn't that neat? Let's hook it up so that it actually works. 
 
 First, we'll need a submit button. Go back to your `index.html` and add a button to the `options` div:
 
 ##### index.html
 
-    <div class="options">
-      <div class="other-settings">
-        <button class="button" id="generate">GENERATE</button>
-      </div>
-    </div>
-
+```html
+<div class="options">
+  <div class="other-settings">
+    <button class="button" id="generate">GENERATE</button>
+  </div>
+</div>
+```
 ##### style.css
-    .button {
-      background-color: #47B6FF;
-      border: none;
-      color: white;
-      padding: 10px 25px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      cursor: pointer;
-      border-radius: 15px;
-    }
-    
-    .button:active, 
-    .button:hover {
-      background-color: #0062A3;
-    }
+```css
+.button {
+  background-color: #47B6FF;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 15px;
+}
 
+.button:active, 
+.button:hover {
+  background-color: #0062A3;
+}
+```
 Now that we've got a button, let's add the Javascript. Delete your current word cloud generation code and copy paste the code below.
 
 ##### script.js
+```javascript
+// create an onclick function to generate a word cloud based on the user's input into the text box
+document.getElementById("generate").onclick = function() {
 
-    // create an onclick function to generate a word cloud based on the user's input into the text box
-    document.getElementById("generate").onclick = function() {
+// clear the container in case it currently has a word cloud in it
+document.getElementById("cloud-container").innerHTML = "";
 
-    // clear the container in case it currently has a word cloud in it
-    document.getElementById("cloud-container").innerHTML = "";
+// set text equal to sample in case text box is empty upon submission
+var text = '';
+if(document.getElementById('input-text').value == ""){
+  text = sample;
+}
+// else fill it with the text from the text bos
+else {
+  var text = document.getElementById('input-text').value;
+}
 
-    // set text equal to sample in case text box is empty upon submission
-    var text = '';
-    if(document.getElementById('input-text').value == ""){
-      text = sample;
-    }
-    // else fill it with the text from the text bos
-    else {
-      var text = document.getElementById('input-text').value;
-    }
-    
-    // remove non-alphabet characters and convert everything to lower case
-    var cleanedText = text.replace(/[^a-zA-Z ]/g, "").toLowerCase();
+// remove non-alphabet characters and convert everything to lower case
+var cleanedText = text.replace(/[^a-zA-Z ]/g, "").toLowerCase();
 
-    // create a chart
-    var chart = anychart.tagCloud();
-    chart.data(cleanedText, {
-      mode: "byWord",
-      maxItems: 12,
-      ignoreItems: commonWords
-    });
+// create a chart
+var chart = anychart.tagCloud();
+chart.data(cleanedText, {
+  mode: "byWord",
+  maxItems: 12,
+  ignoreItems: commonWords
+});
 
-    // create and configure a color scale.
-    var customColorScale = anychart.scales.linearColor();
-    customColorScale.colors(colorSchemes["Default"]);
+// create and configure a color scale.
+var customColorScale = anychart.scales.linearColor();
+customColorScale.colors(colorSchemes["Default"]);
 
-    // set the color scale as the color scale of the chart
-    chart.colorScale(customColorScale);
-    // display the word cloud chart
-    chart.container("cloud-container");
-    chart.draw();
+// set the color scale as the color scale of the chart
+chart.colorScale(customColorScale);
+// display the word cloud chart
+chart.container("cloud-container");
+chart.draw();
 
-    }
-
+}
+```
 The script above creates a function that runs when the user clicks the button. `text.replace(/[^a-zA-Z ]/g, "").toLowerCase()` formats the text entry by using regex to remove any characters that are not alphabetic and then converts all the letters to lowercase. This makes it easier to parse the data and determine which words are the most common. In data science, this process is called "cleaning" our dataset. 
 
 Try out your new code by typing in your own words or using a website like [Project Gutenberg](https://www.gutenberg.org/) to get a free text file of classic novels. 
@@ -212,133 +222,133 @@ Now that we have a fully functioning word cloud generator, let's add some :spark
 Add a radio selection input to your `index.html` that looks like this:
 
 ##### index.html
-
-    <div class="color-picker">
-      <p> COLOR SCHEME </p>
-      <div class="radio">
-        <label class="radio-container">Default
-          <input type="radio" checked="checked" value="Default" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Cool
-          <input type="radio" value="Cool" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Nature
-          <input type="radio" value="Nature" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Vibrant
-          <input type="radio" value="Vibrant" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Delicate
-          <input type="radio" value="Delicate" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Beach
-          <input type="radio" value="Beach" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Autumn
-          <input type="radio" value="Autumn" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Ice
-          <input type="radio" value="Ice" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-        <label class="radio-container">Citrus
-          <input type="radio" value="Citrus" name="colorScheme">
-          <span class="checkmark"></span>
-        </label>
-      </div>
-    </div>
-
+```html
+<div class="color-picker">
+  <p> COLOR SCHEME </p>
+  <div class="radio">
+    <label class="radio-container">Default
+      <input type="radio" checked="checked" value="Default" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Cool
+      <input type="radio" value="Cool" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Nature
+      <input type="radio" value="Nature" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Vibrant
+      <input type="radio" value="Vibrant" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Delicate
+      <input type="radio" value="Delicate" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Beach
+      <input type="radio" value="Beach" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Autumn
+      <input type="radio" value="Autumn" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Ice
+      <input type="radio" value="Ice" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+    <label class="radio-container">Citrus
+      <input type="radio" value="Citrus" name="colorScheme">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+</div>
+```
 Now, we have a radio selection with all of our premade colors. Since `Default` is our default, we set `checked="checked"`. We can style it to make it look nicer by hiding the browser's default radio button and creating our own. 
 
 ##### style.css
+```css
+/* Hide the browser's default radio button */
+.radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
 
-    /* Hide the browser's default radio button */
-    .radio input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: white;
+  border-radius: 50%;
+}
 
-    /* Create a custom radio button */
-    .checkmark {
-      position: absolute;
-      top: 5px;
-      left: 0;
-      height: 15px;
-      width: 15px;
-      background-color: white;
-      border-radius: 50%;
-    }
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+  background-color: #85CEFF;
+}
 
-    /* On mouse-over, add a grey background color */
-    .radio-container:hover input ~ .checkmark {
-      background-color: #85CEFF;
-    }
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+  background-color: #47B6FF;
+}
 
-    /* When the radio button is checked, add a blue background */
-    .radio-container input:checked ~ .checkmark {
-      background-color: #47B6FF;
-    }
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
 
-    /* Create the indicator (the dot/circle - hidden when not checked) */
-    .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+  display: block;
+}
 
-    /* Show the indicator (dot/circle) when checked */
-    .radio-container input:checked ~ .checkmark:after {
-      display: block;
-    }
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+}
 
-    /* Style the indicator (dot/circle) */
-    .radio-container .checkmark:after {
-      top: 5px;
-      left: 5px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: white;
-    }
+.color-picker {
+  margin-left: 10px;
+}
 
-    .color-picker {
-      margin-left: 10px;
-    }
-
-    .radio-container {
-      display: block;
-      position: relative;
-      padding-left: 25px;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+```
 Looking good! Now, we just need to add a few lines to our `onclick` function and we'll be good to go. In `script.js` create a variable called `colorSelection`.
 
 ##### script.js 
-
-    // get the selected color scheme choice
-    var colorSelection = document.querySelector('input[name="colorScheme"]:checked').value;
-
+```javascript
+// get the selected color scheme choice
+var colorSelection = document.querySelector('input[name="colorScheme"]:checked').value;
+```
 Now that we have a variable `colorSelection` which contains the name of the color scheme the user wants, we can set the custom color scale to the selection by replacing our current code with:
 
 ##### script.js
-
-    // create and configure a color scale.
-    var customColorScale = anychart.scales.linearColor();
-    customColorScale.colors(colorSchemes[colorSelection]);
-  
+```javascript
+// create and configure a color scale.
+var customColorScale = anychart.scales.linearColor();
+customColorScale.colors(colorSchemes[colorSelection]);
+``` 
 Try it out! 
 
 ## Part 6: More Customization Options
@@ -350,66 +360,66 @@ Let's add customization options for the mode (spiral vs. rectangle), the scale (
 To create options for mode and scale, let's use radio input selections again. Add the radio inputs in you `index.html` like this:
 
 ##### index.html
-
-    <div class="other-settings">
-      <div class="right-settings">
-        <div class="radio">
-          <p> MODE </p>
-          <label class="radio-container">Spiral
-            <input type="radio" checked="checked" value="Spiral" name="mode">
-            <span class="checkmark"></span>
-          </label>
-          <label class="radio-container">Rectangle
-            <input type="radio" value="Rectangle" name="mode">
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <div class="radio scales">
-          <p> SCALES </p>
-          <label class="radio-container">Linear
-            <input type="radio" checked="checked" value="Linear" name="scales">
-            <span class="checkmark" ></span>
-          </label>
-          <label class="radio-container">Logarithmic
-            <input type="radio" value="Logarithmic" name="scales">
-            <span class="checkmark"></span>
-          </label>
-        </div>
-      </div>
-      <button class="button" id="generate">GENERATE</button>
+```html
+<div class="other-settings">
+  <div class="right-settings">
+    <div class="radio">
+      <p> MODE </p>
+      <label class="radio-container">Spiral
+        <input type="radio" checked="checked" value="Spiral" name="mode">
+        <span class="checkmark"></span>
+      </label>
+      <label class="radio-container">Rectangle
+        <input type="radio" value="Rectangle" name="mode">
+        <span class="checkmark"></span>
+      </label>
     </div>
-
+    <div class="radio scales">
+      <p> SCALES </p>
+      <label class="radio-container">Linear
+        <input type="radio" checked="checked" value="Linear" name="scales">
+        <span class="checkmark" ></span>
+      </label>
+      <label class="radio-container">Logarithmic
+        <input type="radio" value="Logarithmic" name="scales">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+  </div>
+  <button class="button" id="generate">GENERATE</button>
+</div>
+```
 Let's style the `div` so that the Mode and Scale options are side by side using Flexbox. Paste this CSS into `style.css`.
 
 ##### style.css
+```css
+.right-settings {
+  display: flex;
+}
 
-    .right-settings {
-      display: flex;
-    }
-
-    .scales {
-      margin-left: 20px;
-    }
-
+.scales {
+  margin-left: 20px;
+}
+```
 To get it functioning, we'll use the same process as before. Add in two variables named `mode` and `scale` to `script.js`.
 
 ##### script.js 
-
-    var mode = document.querySelector('input[name="mode"]:checked').value;
-    var scale = document.querySelector('input[name="scales"]:checked').value;
-
+```javascript
+var mode = document.querySelector('input[name="mode"]:checked').value;
+var scale = document.querySelector('input[name="scales"]:checked').value;
+```
 The default AnyChart Word Cloud settings have the mode as "Spiral" and the scale as "Linear" so we only need to change the settings if the user selects "Rectangle" for mode or "Logarithmic" for  scale. Add this code underneath your color scheme selection code. 
 
 ##### script.js 
+```javascript
+if(mode == "Rectangle"){
+  chart.mode("rect");
+}
 
-    if(mode == "Rectangle"){
-      chart.mode("rect");
-    }
-
-    if(scale == "Logarithmic") {
-      chart.scale(anychart.scales.log());
-    }
-
+if(scale == "Logarithmic") {
+  chart.scale(anychart.scales.log());
+}
+```
 Before moving on, explore the different options to see what they do. 
 
 ### Text spacing
@@ -417,70 +427,72 @@ Before moving on, explore the different options to see what they do.
 Another cool option is to change the spacing between the words. To do this, we're going to create a slider. Add this code directly above your button. 
 
 ##### index.html
-
-    <p class="second-setting">TEXT SPACING</p>
-    <input type="range" min="1" max="30" value="1" class="slider" id="myRange">
-    <p>Value: <span id="demo"></span></p>
-
+```html
+<p class="second-setting">TEXT SPACING</p>
+<input type="range" min="1" max="30" value="1" class="slider" id="myRange">
+<p>Value: <span id="demo"></span></p>
+```
 The slider is pretty ugly so let's restyle it. We do the same thing that we did with the radio buttons. We're going to hide the default style and create our own. 
 
 ##### style.css
-    .slidecontainer {
-      width: 100%;
-    }
+```css
+.slidecontainer {
+  width: 100%;
+}
 
-    .slider {
-      -webkit-appearance: none;
-      width: 250px;
-      height: 10px;
-      background: white;
-      border-radius: 20px;
-      outline: none;
-    }
+.slider {
+  -webkit-appearance: none;
+  width: 250px;
+  height: 10px;
+  background: white;
+  border-radius: 20px;
+  outline: none;
+}
 
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      background: #47B6FF;
-      cursor: pointer;
-    }
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #47B6FF;
+  cursor: pointer;
+}
 
-    .slider::-moz-range-thumb {
-      width: 17px;
-      height: 17px;
-      background: #47B6FF;
-      cursor: pointer;
-    }
-
+.slider::-moz-range-thumb {
+  width: 17px;
+  height: 17px;
+  background: #47B6FF;
+  cursor: pointer;
+}
+```
 Our slider looks fantastic, but it doesn't work. Let's fix that. Add this code at the bottom of your `script.js` outside of the `onclick` function. 
 
 ##### script.js
+```javascript
+var slider = document.getElementById("myRange");
+var output = document.getElementById("display");
+output.innerHTML = slider.value;
 
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("display");
-    output.innerHTML = slider.value;
-
-    slider.oninput = function() {
-      output.innerHTML = this.value;
-    }
-
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+```
 This code takes the value of the slider input and displays it in the paragraph below so the user can see the numeric value. Try it out. 
 
 Now, let's add code to set the text spacing based on the user input. Inside of your `onclick` function, create a variable called `wordSpacing`.
 
 ##### script.js
-    var wordSpacing = document.getElementById("display").innerHTML;
-
+```javascript
+var wordSpacing = document.getElementById("display").innerHTML;
+```
 Below the color scheme selection code, add the following lines:
 
 ##### script.js
-
-    // set text spacing
-    chart.textSpacing(wordSpacing);
-
+```javascript
+// set text spacing
+chart.textSpacing(wordSpacing);
+```
 Woohoo! Your word cloud generator is almost complete. Play around with the text spacing slider to see how it works. 
 
 ## Part 7: Finishing Touches
@@ -489,32 +501,32 @@ Woohoo! Your word cloud generator is almost complete. Play around with the text 
 Let's create a word cloud when the page loads so that the user can see what a default word cloud looks like. To do this, we are going to create an `onload` function. 
 
 ##### script.js
+```javascript
+document.getElementById("container").onload = function() {
+  
+  // set placeholder text
+  document.getElementById("input-text").placeholder = sample;
 
-    document.getElementById("container").onload = function() {
-      
-      // set placeholder text
-      document.getElementById("input-text").placeholder = sample;
+  // create a chart
+  var chart = anychart.tagCloud();
+  chart.data(sample, {
+    mode: "byWord",
+    maxItems: 12,
+    ignoreItems: commonWords
+  });
 
-      // create a chart
-      var chart = anychart.tagCloud();
-      chart.data(sample, {
-        mode: "byWord",
-        maxItems: 12,
-        ignoreItems: commonWords
-      });
+  // create and configure a color scale.
+  var customColorScale = anychart.scales.linearColor();
+  customColorScale.colors(colorSchemes["Default"]);
 
-      // create and configure a color scale.
-      var customColorScale = anychart.scales.linearColor();
-      customColorScale.colors(colorSchemes["Default"]);
+  // set the color scale as the color scale of the chart
+  chart.colorScale(customColorScale);
+  // display the word cloud chart
+  chart.container("cloud-container");
+  chart.draw();
 
-      // set the color scale as the color scale of the chart
-      chart.colorScale(customColorScale);
-      // display the word cloud chart
-      chart.container("cloud-container");
-      chart.draw();
-
-    };
-
+};
+```
 And now you've got a gorgeous word cloud generator. Congratulations!
 
 ![Congratulations Gif](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F5mCQOcUfywmyI%2Fgiphy.gif&f=1&nofb=1)
