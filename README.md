@@ -202,11 +202,10 @@ Now that we've got a button, let's add the Javascript. Delete your current word 
 
 The script above creates a function that runs when the user clicks the button. `text.replace(/[^a-zA-Z ]/g, "").toLowerCase()` formats the text entry by using regex to remove any characters that are not alphabetic and then converts all the letters to lowercase. This makes it easier to parse the data and determine which words are the most common. In data science, this process is called "cleaning" our dataset. 
 
-Try out your new code by typing in your own words or using a website like Project Gutenberg to get a free text file of classic novels. 
- spice :sparkles:. 
+Try out your new code by typing in your own words or using a website like [Project Gutenberg](https://www.gutenberg.org/) to get a free text file of classic novels. 
 
 ## Part 5: Allow Users to Customize the Color Scheme
-Now that we have a fully functioning word cloud generator, let's add some :sparkles: spice :sparkles:. First, let's allow users to choose their own color scheme from one of our premade color schemes. 
+Now that we have a fully functioning word cloud generator, let's add some :sparkles:spice:sparkles:. First, let's allow users to choose their own color scheme from one of our premade color schemes. 
 
 Add a radio selection input to your `index.html` that looks like this:
 
